@@ -41,7 +41,7 @@ void loop() {
   float humidity = dht.readHumidity();
   float temperature = dht.readTemperature();
   
-  if (isnan(h) || isnan(t)) {
+  if (isnan(humidity) || isnan(temperature)) {
     Serial.println("Failed to read data from DHT sensor!");
     return;
   }
@@ -55,7 +55,7 @@ void loop() {
     postStr += "\r\n\r\n";
     
     client.print("POST /update HTTP/1.1\n");
-    client.print("Host: "+server+"\n");
+    client.print("Host: "+String(server)+"\n");
     client.print("Connection: close\n");
     client.print("X-THINGSPEAKAPIKEY: "+apiKey+"\n");
     client.print("Content-Type: application/x-www-form-urlencoded\n");
