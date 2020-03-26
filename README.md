@@ -5,11 +5,12 @@ Using a ESP8266 to collect and analyze data about the air (temperature, humidity
 This sketch sends temperature and humidity data from the DHT11 sensor to Thingspeak.
 
 ### Requirements
-* NodeMCU ESP8266
-* DHT11
+* NodeMCU ESP8266 Board
+* DHT11 Sensor
 
 ### Wiring
 | DHT11 Pins | ESP8266 Pins |
-| GND | G  |
-| VCC | 3V |
-| Signal | RX (GPIO3) |
+|------------|--------------|
+| GND        | G            |
+| VCC        | 3V           |
+| Signal     | RX (GPIO3)   |
