@@ -10,21 +10,21 @@ In the future I might want to add a display and set up a notification system tha
 ## DHT11-Thingspeak
 This sketch sends temperature and humidity data from the DHT11 sensor to Thingspeak.
 
-![Breadboard visualisation of DHT11-Thingspeak](/docs/DHT11-Thingspeak_breadboard.png)
-
 ### Hardware Requirements
 * NodeMCU ESP8266 Board
 * 4.7k Ohm Resistor
 * DHT11 Sensor
 
 ### Wiring
+| Circuit Diagram | Breadboard Wiring |
+|-----------------|-------------------|
+| ![Circuit Diagram of DHT11-Thingspeak](/docs/DHT11-Thingspeak_circuitDiagram.png) | ![Breadboard visualisation of DHT11-Thingspeak](/docs/DHT11-Thingspeak_breadboard.png) |
+
 | DHT11 Pins | ESP8266 Pins |
 |------------|--------------|
 | GND        | G            |
 | VCC        | 3V           |
 | Signal     | RX (GPIO3)   |
-
-![Circuit Diagram of DHT11-Thingspeak](/docs/DHT11-Thingspeak_circuitDiagram.png)
 
 ## DHT11-MQ135-Thingspeak
 This sketch sends data from DHT11 and MQ135 to Thingspeak.
