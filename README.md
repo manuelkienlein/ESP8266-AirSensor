@@ -39,6 +39,10 @@ This sketch sends data from DHT11 and MQ135 to Thingspeak.
 MQ135 by GeorgK: https://github.com/GeorgK/MQ135
 
 ### Wiring
+| Circuit Diagram | Breadboard Wiring |
+|-----------------|-------------------|
+| ![Circuit Diagram of DHT11-MQ135-Thingspeak](/docs/DHT11-MQ135-Thingspeak_circuitDiagram.png) | ![Breadboard visualisation of DHT11-MQ135-Thingspeak](/docs/DHT11-MQ135-Thingspeak_breadboard.png) |
+
 | DHT11 Pins | ESP8266 Pins | MQ135 Pins |
 |------------|--------------|------------|
 | GND        | G            | GND        |
@@ -50,6 +54,6 @@ MQ135 by GeorgK: https://github.com/GeorgK/MQ135
 ### Setup
 1. At first, the sensor has to be calibrated. For this, connect the sensor to the circuit and leave it powered on for 24 hours to burn in.
 2. Then put it into outside air for one hour at preferably at 20°C and 35% relative humidity. After that the calibration value should have settled.
-Now we have to read out the calibration value `rzero = gasSensor.getRZero();`
-3. After that we replace the predefined RZero constant with our determined value in the file `MQ135.h`` from the MQ135 sensor library: `#define RZERO 890`
+Now we have to read out the calibration value: `rzero = gasSensor.getRZero();`
+3. After that we replace the predefined RZero constant with our determined value in the file `MQ135.h` from the MQ135 sensor library: `#define RZERO 890`
 (Note: Every sensor has a own specific RZero!)
