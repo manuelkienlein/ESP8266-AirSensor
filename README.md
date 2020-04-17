@@ -57,3 +57,14 @@ MQ135 by GeorgK: https://github.com/GeorgK/MQ135
 Now we have to read out the calibration value: `rzero = gasSensor.getRZero();`
 3. After that we replace the predefined RZero constant with our determined value in the file `MQ135.h` from the MQ135 sensor library: `#define RZERO 890`
 (Note: Every sensor has a own specific RZero!)
+
+## DHT11-MQ135-Thingspeak-Web
+This sketch is a refactored version of the previous sketch [DHT11-MQ135-Thingspeak](#DHT11-MQ135-Thingspeak).
+Additionally a webserver was included which provides the sensor data in JSON format.
+
+### JSON Output
+| URL                         | Example result                                                          |
+|-----------------------------|-------------------------------------------------------------------------|
+| `http://<IP-Address>/`      | `{"temperature":23.60, "humidity":31.00, "ppm":443.96, "rzero":979.75}` |
+| `http://<IP-Address>/dht11` | `{"temperature":23.60, "humidity":31.00}`                               |
+| `http://<IP-Address>/mq135` | `{"ppm":443.96, "rzero":979.75}`                                        |
