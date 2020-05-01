@@ -1,5 +1,6 @@
 #include <ESP8266WiFi.h>
 #include <ESP8266WebServer.h>
+#include <LiquidCrystal_I2C.h>
 #include <DHT.h>
 #include "MQ135.h"
 
@@ -11,12 +12,15 @@ const char* wifi_password = "WIFI-Password";
 // Variables and Constants
 #define PIN_DHT 3 // Pin for DHT11
 #define PIN_MQ 0  // Pin for MQ-135
+#define LCD_COLUMNS 16
+#define LCD_ROWS 2
 const char* server = "api.thingspeak.com";
 #define INTERVAL_THINGSPEAK 20 // Thingspeak delay
 
 // Initialisation
 DHT dht(PIN_DHT, DHT11);
 MQ135 gasSensor = MQ135(PIN_MQ);
+LiquidCrystal_I2C lcd(0x27, LCD_COLUMNS, LCD_ROWS);
 
 WiFiClient client;
 ESP8266WebServer webserver(80);
@@ -32,15 +36,41 @@ unsigned long currentMillis;
 void setup() {
   Serial.begin(115200);
   Serial.println("Startup...");
-  delay(30);
+
+  lcd.begin(LCD_COLUMNS, LCD_ROWS);
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0, 0); 
+  lcd.print("Startup...");
   
   dht.begin();
+  
+  lcd.setCursor(0, 1);
+  lcd.print("Connect WiFi");
   setupWiFi();
+  lcd.clear();
+  lcd.print("IP Address:");
+  lcd.setCursor(0, 1);
+  lcd.print(WiFi.localIP());
+  delay(10000);
 
   webserver.on("/", handleWebserverRequest_index);
   webserver.on("/dht11", handleWebserverRequest_dht11);
   webserver.on("/mq135", handleWebserverRequest_mq135);
   webserver.begin();
+
+  int warmup = 30;
+  lcd.clear();
+  lcd.print(" IoT Air-Sensor ");
+  for(int i = warmup; i > 0; i--){
+    lcd.setCursor(0, 1);
+    lcd.print("Warming up: "+String(i)+"s ");
+    delay(1000);
+  }
+
+  lcd.clear();
+  delay(1000);
+  
 }
 
 void loop() {
@@ -71,6 +101,9 @@ void loop() {
 
   // Handle webserver requests
   webserver.handleClient();
+
+  // Update display
+  updateDisplay();
   
   //Serial.println("Temperature:"+String(t)+" "+"Humidity:"+String(h));
   Serial.println("Temperature:"+String(temperature)+" "+"Humidity:"+String(humidity)+" "+"rZero:"+String(rzero)+" "+"rZeroC:"+String(rzero_corrected)+" "+"PPM:"+String(ppm)+" "+"PPMC:"+String(ppm_corrected));
@@ -139,4 +172,14 @@ void handleWebserverRequest_dht11(){
 void handleWebserverRequest_mq135(){
   String message = "{\"ppm\":"+String(ppm)+", \"rzero\":"+String(rzero)+"}";
   webserver.send(200, "application/json", message);
+}
+
+void updateDisplay(){
+  // Print first line
+  lcd.setCursor(0, 0); 
+  lcd.print("T: "+String(int(temperature))+(char)223+"C | H: "+String(int(humidity))+"%");
+
+  // Print second line
+  lcd.setCursor(0, 1);
+  lcd.print("PPM: "+String(int(ppm)));
 }
