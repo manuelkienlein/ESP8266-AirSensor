@@ -9,7 +9,7 @@ In the future I might want set up a notification system that will send you a not
 
 | Finished soldered board | LCD Display |
 |-------------------------|-------------|
-| [Finished soldered board with all components](/docs/img-board.png) | ![LCD Display for humidity, temperature and air quality](/docs/img-display.png) |
+| ![Finished soldered board with all components](/docs/img-board.png) | ![LCD Display for humidity, temperature and air quality](/docs/img-display.png) |
 
 ## DHT11-Thingspeak
 This sketch sends temperature and humidity data from the DHT11 sensor to Thingspeak.
