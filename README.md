@@ -68,3 +68,28 @@ Additionally a webserver was included which provides the sensor data in JSON for
 | `http://<IP-Address>/`      | `{"temperature":23.60, "humidity":31.00, "ppm":443.96, "rzero":979.75}` |
 | `http://<IP-Address>/dht11` | `{"temperature":23.60, "humidity":31.00}`                               |
 | `http://<IP-Address>/mq135` | `{"ppm":443.96, "rzero":979.75}`                                        |
+
+## DHT11-MQ135-Thingspeak-Web-Display
+In order to add a display to this setup, we too extend the previous installation [DHT11-MQ135-Thingspeak-Web](#DHT11-MQ135-Thingspeak-Web).
+The source code can be found in [DHT11-MQ135-Thingspeak-Web-Display.ino](DHT11-MQ135-Thingspeak-Web-Display.ino) using address `0x27` for the display.
+
+### Hardware Requirements
+* NodeMCU ESP8266 Board
+* 4.7k Ohm Resistor
+* DHT11 Sensor
+* MQ135 Sensor
+* 16x2 LCD Display
+* I2C LCD Interface Adapter
+
+### Wiring
+We do the same wiring like above plus some additional connections between the LCD-Display and the ESP8266 board.
+
+| Display Pins | ESP8266 Pins |
+|--------------|--------------|
+| SCL          | D1           |
+| SDA          | D2           |
+| VCC          | VU           |
+| GND          | G            |
+
+![Breadboard visualisation of DHT11-MQ135-Thingspeak-Web-Display](/docs/DHT11-MQ135-Thingspeak-Web-Display_breadboard.png)
+
