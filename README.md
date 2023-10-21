@@ -3,9 +3,13 @@ Using a ESP8266 to collect and analyze data about the air (temperature, humidity
 
 This project is about building an IoT device that collects information about the air.
 The sensor data should then be sent to Thingspeak or an MQTT broker.
-Data on temperature, humidity and air quality in your room can be viewed online.
+Data on temperature, humidity and air quality in your room can be viewed online and on an LCD display.
 In addition, I would like to integrate a small web server that provides the sensor data via a REST API.
-In the future I might want to add a display and set up a notification system that will send you a notification when there is bad air in your room.
+In the future I might want set up a notification system that will send you a notification when there is bad air in your room.
+
+| Finished soldered board | LCD Display |
+|-------------------------|-------------|
+| [Finished soldered board with all components](/docs/img-board.png) | ![LCD Display for humidity, temperature and air quality](/docs/img-display.png) |
 
 ## DHT11-Thingspeak
 This sketch sends temperature and humidity data from the DHT11 sensor to Thingspeak.
@@ -70,8 +74,9 @@ Additionally a webserver was included which provides the sensor data in JSON for
 | `http://<IP-Address>/mq135` | `{"ppm":443.96, "rzero":979.75}`                                        |
 
 ## DHT11-MQ135-Thingspeak-Web-Display
-In order to add a display to this setup, we too extend the previous installation [DHT11-MQ135-Thingspeak-Web](#DHT11-MQ135-Thingspeak-Web).
+In order to add a display to this setup, we extend the previous installation [DHT11-MQ135-Thingspeak-Web](#DHT11-MQ135-Thingspeak-Web).
 The source code can be found in [DHT11-MQ135-Thingspeak-Web-Display.ino](DHT11-MQ135-Thingspeak-Web-Display.ino) using address `0x27` for the display.
+Then you get information such as air humidity, temperature and airpm (particles per million) on your screen.
 
 ### Hardware Requirements
 * NodeMCU ESP8266 Board
